@@ -79,6 +79,7 @@ const loginUser = async (payload: ILoginUserPayload) => {
     if (data.user.isDeleted || data.user.status === UserStatus.DELETED) {
        throw new AppError(status.NOT_FOUND, "User is deleted");
     }
+    
 
     return data;
 
