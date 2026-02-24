@@ -12,7 +12,7 @@ export const globalErrorHandler=(err:any,req:Request,res:Response,next:NextFunct
         console.log("Error From Global Error Handler",err)
     }
    
-      let errorSources: TErrorSources[] = []
+    let errorSources: TErrorSources[] = []
     let statusCode: number = status.INTERNAL_SERVER_ERROR;
     let message: string = 'Internal Server Error';
     let stack: string | undefined = undefined;
