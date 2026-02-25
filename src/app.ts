@@ -4,8 +4,15 @@ import { IndexRoutes } from "./app/routes";
 import { globalErrorHandler } from "./app/middleware/globalErrorHandler";
 import { notFound } from "./app/middleware/notFound";
 import cookieParser from "cookie-parser";
+import path from "path";
+import { toNodeHandler } from "better-auth/node";
+import { auth } from "./app/lib/auth";
 const app: Application = express();
-// Enable URL-encoded form data parsing
+
+app.set("view engine", "ejs");
+app.set("views",path.resolve(process.cwd(), `src/app/templates`) )
+app.use("/api/auth", toNodeHandler(auth))
+
 app.use(express.urlencoded({ extended: true }));
 
 // Middleware to parse JSON bodies

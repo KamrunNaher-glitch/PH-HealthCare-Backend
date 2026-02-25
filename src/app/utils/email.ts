@@ -4,6 +4,7 @@ import { envVars } from "../../config/env";
 import path from "path";
 import AppError from "../errorHelpers/appError";
 import status from "http-status";
+
 const transporter = nodemailer.createTransport({
     host : envVars.EMAIL_SENDER.SMTP_HOST,
     secure: true,
@@ -18,6 +19,7 @@ interface SendEmailOptions {
     to: string;
     subject: string;
     templateName: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     templateData: Record<string, any>;
     attachments?: {
         filename: string;
@@ -31,9 +33,7 @@ export const sendEmail = async ({subject, templateData, templateName, to, attach
     
     try {
         const templatePath = path.resolve(process.cwd(), `src/app/templates/${templateName}.ejs`);
-
         const html = await ejs.renderFile(templatePath, templateData);
-
         const info = await transporter.sendMail({
             from: envVars.EMAIL_SENDER.SMTP_FROM,
             to : to,
