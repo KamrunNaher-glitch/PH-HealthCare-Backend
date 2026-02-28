@@ -9,8 +9,10 @@ import { toNodeHandler } from "better-auth/node";
 import { auth } from "./app/lib/auth";
 import { envVars } from "./config/env";
 import cors from "cors";
-const app: Application = express();
+import qs from "qs";
 
+const app: Application = express();
+app.set("query parser",(str:string) => qs.parse(str))
 app.set("view engine", "ejs");
 app.set("views",path.resolve(process.cwd(),`src/app/templates`))
 app.use(cors({
