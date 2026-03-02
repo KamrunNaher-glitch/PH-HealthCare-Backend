@@ -5,6 +5,8 @@ import { UserRoutes} from "../modules/user/user.route";
 import { DoctorRoutes } from "../modules/doctor/doctor.route";
 import { AdminRoutes } from "../modules/admin/admin.route";
 import { scheduleRoutes } from "../modules/schedule/schedule.route";
+import { DoctorScheduleRoutes } from "../modules/doctorSchedule/doctorSchedule.route";
+import { AppointmentRoutes } from "../modules/appiontment/appiontment.route";
 
 const router = Router();
 router.use("/auth",AuthRoutes)
