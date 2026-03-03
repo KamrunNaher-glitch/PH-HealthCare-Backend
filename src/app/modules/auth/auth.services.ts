@@ -5,7 +5,7 @@ import { auth } from "../../lib/auth";
 import { prisma } from "../../lib/prisma";
 import { tokenUtils } from "../../utils/token";
 import { IRequestUser } from "../../interfaces/requestUser.interface";
-import { envVars } from "../../../config/env";
+import { envVars } from "../../config/env";
 import { jwtUtils } from "../../utils/jwt";
 import { IChangePasswordPayload } from "./auth.interface";
 import { JwtPayload } from "jsonwebtoken";

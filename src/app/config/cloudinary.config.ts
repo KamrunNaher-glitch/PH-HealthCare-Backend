@@ -1,7 +1,8 @@
 import {v2 as cloudinary,UploadApiResponse} from "cloudinary"
 import { envVars } from "./env"
-import AppError from "../app/errorHelpers/appError";
+import AppError from "../errorHelpers/appError";
 import status from "http-status";
+
 cloudinary.config({
     cloud_name: envVars.CLOUDINARY.CLOUDINARY_CLOUD_NAME,
     api_key: envVars.CLOUDINARY.CLOUDINARY_API_KEY,

@@ -5,8 +5,8 @@ import { IRequestUser } from "../../interfaces/requestUser.interface";
 import { prisma } from "../../lib/prisma";
 import { IBookAppointmentPayload } from "./appiontment.interface";
 import { v7 as uuidv7 } from "uuid";
-import { envVars } from "../../../config/env";
-import { stripe } from "../../../config/stripe.config";
+import { envVars } from "../../config/env";
+import { stripe } from "../../config/stripe.config";
 // Pay Now Book Appointment
 const bookAppointment = async (payload : IBookAppointmentPayload, user : IRequestUser) => {
    const patientData = await prisma.patient.findUniqueOrThrow({
@@ -358,35 +358,35 @@ const initiatePayment = async (appointmentId: string, user : IRequestUser) => {
         throw new AppError(status.BAD_REQUEST, "Appointment is canceled");
     }
 
-    // const session = await stripe.checkout.sessions.create({
-    //     payment_method_types: ["card"],
-    //     mode: 'payment',
-    //     line_items: [
-    //         {
-    //             price_data: {
-    //                 currency: "bdt",
-    //                 product_data: {
-    //                     name: `Appointment with Dr. ${appointmentData.doctor.name}`,
-    //                 },
-    //                 unit_amount: appointmentData.doctor.appointmentFee * 100,
-    //             },
-    //             quantity: 1,
-    //         }
-    //     ],
-    //     metadata: {
-    //         appointmentId: appointmentData.id,
-    //         paymentId: appointmentData.payment.id,
-    //     },
+    const session = await stripe.checkout.sessions.create({
+        payment_method_types: ["card"],
+        mode: 'payment',
+        line_items: [
+            {
+                price_data: {
+                    currency: "bdt",
+                    product_data: {
+                        name: `Appointment with Dr. ${appointmentData.doctor.name}`,
+                    },
+                    unit_amount: appointmentData.doctor.appointmentFee * 100,
+                },
+                quantity: 1,
+            }
+        ],
+        metadata: {
+            appointmentId: appointmentData.id,
+            paymentId: appointmentData.payment.id,
+        },
 
-    //     success_url: `${envVars.FRONTEND_URL}/dashboard/payment/payment-success?appointment_id=${appointmentData.id}&payment_id=${appointmentData.payment.id}`,
+        success_url: `${envVars.FRONTEND_URL}/dashboard/payment/payment-success?appointment_id=${appointmentData.id}&payment_id=${appointmentData.payment.id}`,
 
-    //     // cancel_url: `${envVars.FRONTEND_URL}/dashboard/payment/payment-failed`,
-    //     cancel_url: `${envVars.FRONTEND_URL}/dashboard/appointments?error=payment_cancelled`,
-    // })
+        // cancel_url: `${envVars.FRONTEND_URL}/dashboard/payment/payment-failed`,
+        cancel_url: `${envVars.FRONTEND_URL}/dashboard/appointments?error=payment_cancelled`,
+    })
 
-    // return {
-    //     paymentUrl: session.url,
-    // }
+    return {
+        paymentUrl: session.url,
+    }
 }
 
 const cancelUnpaidAppointments = async () => {

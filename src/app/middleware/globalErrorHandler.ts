@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from "express";
-import { envVars } from "../../config/env";
+import { envVars } from "../config/env";
 import status from "http-status";
 import { TErrorResponse, TErrorSources } from "../interfaces/error.interface";
 import z from "zod";
 import { handleZodError } from "../errorHelpers/handleZodError";
 import AppError from "../errorHelpers/appError";
-import { deleteFileFromCloudinary } from "../../config/cloudinary.config";
+import { deleteFileFromCloudinary } from "../config/cloudinary.config";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
 export const globalErrorHandler= async(err:any,req:Request,res:Response,next:NextFunction) =>{

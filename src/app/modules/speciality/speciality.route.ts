@@ -2,7 +2,7 @@ import { Router } from "express";
 import { SpecialtyController } from "./speciality.controller";
 import { checkAuth } from "../../middleware/checkAuth";
 import { Role } from "../../../generated/prisma/enums";
-import { multerUpload } from "../../../config/multer.config";
+import { multerUpload } from "../../config/multer.config";
 import { validateRequest } from "../../middleware/validateRequest";
 import { SpecialtyValidation } from "./speciality.validation";
 const router = Router();
