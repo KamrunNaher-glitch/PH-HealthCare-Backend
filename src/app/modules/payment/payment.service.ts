@@ -7,6 +7,7 @@ import { sendEmail } from "../../utils/email";
 import { generateInvoicePdf } from "./payment.utils";
 
 
+
 const handlerStripeWebhookEvent = async (event : Stripe.Event) =>{
 
     const existingPayment = await prisma.payment.findFirst({
@@ -61,8 +62,6 @@ const handlerStripeWebhookEvent = async (event : Stripe.Event) =>{
                 });
 
                 let invoiceUrl = null;
-                
-
                 // If payment is successful, generate and upload invoice
                 if (session.payment_status === "paid") {
                     try {
