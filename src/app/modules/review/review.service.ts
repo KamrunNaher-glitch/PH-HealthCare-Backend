@@ -2,7 +2,7 @@ import status from "http-status";
 import AppError from "../../errorHelpers/appError";
 import { IRequestUser } from "../../interfaces/requestUser.interface";
 import { prisma } from "../../lib/prisma";
-import { ICreateReviewPayload } from "./review.interface";
+import { ICreateReviewPayload, IUpdateReviewPayload } from "./review.interface";
 import { PaymentStatus, Role } from "../../../generated/prisma/enums";
 
 const giveReview = async (user : IRequestUser, payload : ICreateReviewPayload) => {
